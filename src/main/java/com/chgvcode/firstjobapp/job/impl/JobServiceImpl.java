@@ -20,7 +20,7 @@ public class JobServiceImpl implements JobService {
         return jobs;
     }
 
-    public Job getJobById(@RequestBody Long id){
+    public Job getJobById(Long id){
         for (Job job : jobs){ //return jobs.get(id);
             if (job.getId().equals(id)) return job;
         }
@@ -31,5 +31,10 @@ public class JobServiceImpl implements JobService {
     public void createJob(Job job) {
         job.setId(nextId++); //job.setId((long) jobs.size() + 1);
         jobs.add(job);
+    }
+
+    @Override
+    public boolean deleteJobById(Long id) {
+        return jobs.remove(getJobById(id));
     }
 }

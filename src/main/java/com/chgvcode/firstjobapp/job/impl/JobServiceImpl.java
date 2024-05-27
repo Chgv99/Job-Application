@@ -37,4 +37,19 @@ public class JobServiceImpl implements JobService {
     public boolean deleteJobById(Long id) {
         return jobs.remove(getJobById(id));
     }
+
+    @Override
+    public boolean updateJob(Long id, Job updatedJob) {
+
+        Job job = getJobById(id);
+        if (job == null) return false;
+
+        job.setTitle(updatedJob.getTitle());
+        job.setDescription(updatedJob.getDescription());
+        job.setMaxSalary(updatedJob.getMaxSalary());
+        job.setMinSalary(updatedJob.getMinSalary());
+        job.setLocation(updatedJob.getLocation());
+
+        return true;
+    }
 }

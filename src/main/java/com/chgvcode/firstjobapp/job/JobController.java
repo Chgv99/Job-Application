@@ -1,5 +1,6 @@
 package com.chgvcode.firstjobapp.job;
 
+import com.chgvcode.firstjobapp.company.Company;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class JobController {
     @PostMapping
     public ResponseEntity<String> createJob(@RequestBody Job job){
         jobService.createJob(job);
+        // we could check if a job's company exists here
         return new ResponseEntity<>("Job added successfully", HttpStatus.CREATED);
     }
 

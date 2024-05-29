@@ -1,9 +1,7 @@
 package com.chgvcode.firstjobapp.job;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.chgvcode.firstjobapp.company.Company;
+import jakarta.persistence.*;
 
 @Entity
 //@Table(name = "job_table") //tell a new name other than the class'
@@ -16,6 +14,9 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    @ManyToOne
+    private Company company;
 
     public Job() {}
 
@@ -74,5 +75,13 @@ public class Job {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

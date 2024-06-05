@@ -12,8 +12,6 @@ public class CompanyController {
 
     private CompanyService companyService;
 
-    //public CompanyController() {}
-
     public CompanyController(CompanyService companyService) {
         this.companyService = companyService;
     }
@@ -51,17 +49,5 @@ public class CompanyController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    /*
-    Companies
-    PUT /companies/{id}
-    DELETE /companies/{id}
-
-    Reviews
-    GET /companies/{companyId}/reviews
-    POST /companies/{companyId}/reviews
-    GET /companies/{companyId}/reviews/{reviewId}
-    PUT /companies/{companyId}/reviews/{reviewId}
-    DELETE /companies/{companyId}/reviews/{reviewId}
-     */
 
 }

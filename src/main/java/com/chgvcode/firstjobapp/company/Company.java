@@ -1,6 +1,7 @@
 package com.chgvcode.firstjobapp.company;
 
 import com.chgvcode.firstjobapp.job.Job;
+import com.chgvcode.firstjobapp.review.Review;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -18,8 +19,8 @@ public class Company {
     @OneToMany(mappedBy = "company") //field "company" inside Job table
     private List<Job> jobs;
 
-    //@OneToMany
-    //private List<Review> reviews;
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
     public Company() {
     }

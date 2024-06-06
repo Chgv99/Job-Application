@@ -1,32 +1,39 @@
 package com.chgvcode.firstjobapp.review.impl;
 
+import com.chgvcode.firstjobapp.company.Company;
+import com.chgvcode.firstjobapp.company.CompanyService;
 import com.chgvcode.firstjobapp.review.Review;
 import com.chgvcode.firstjobapp.review.ReviewRepository;
 import com.chgvcode.firstjobapp.review.ReviewService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
-    ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
-    public ReviewServiceImpl(ReviewRepository reviewRepository) {
+    private final CompanyService companyService;
+
+    public ReviewServiceImpl(ReviewRepository reviewRepository, CompanyService companyService) {
         this.reviewRepository = reviewRepository;
+        this.companyService = companyService;
     }
 
     @Override
-    public void findAll() {
-        reviewRepository.findAll();
+    public List<Review> findAll(Long companyId) {
+        return reviewRepository.findByCompanyId(companyId);
     }
 
     @Override
-    public void addReview(Review review) {
-        reviewRepository.save(review);
-    }
-
-    @Override
-    public void findById(Long companyId) {
-        reviewRepository.findById(companyId);
+    public boolean addReview(Long companyId, Review review) {
+        Company company = companyService.getCompanyById(companyId);
+        if (company != null){
+            review.setCompany(company);
+            reviewRepository.save(review);
+        }
+        return company != null;
     }
 
 }

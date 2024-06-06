@@ -1,10 +1,10 @@
 package com.chgvcode.firstjobapp.review;
 
+import java.util.List;
+
 public interface ReviewService {
 
-    void findAll();
+    List<Review> findAll(Long companyId);
 
-    void findById(Long companyId);
-
-    void addReview(Review review);
+    boolean addReview(Long companyId, Review review);
 }

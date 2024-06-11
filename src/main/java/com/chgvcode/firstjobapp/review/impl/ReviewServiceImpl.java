@@ -8,7 +8,6 @@ import com.chgvcode.firstjobapp.review.ReviewService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -49,6 +48,36 @@ public class ReviewServiceImpl implements ReviewService {
                 .filter(review -> review.getId().equals(reviewId))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public boolean updateReview(Long companyId, Long reviewId, Review newReview) {
+        List<Review> reviews = reviewRepository.findByCompanyId(companyId);
+
+        for (Review review : reviews) {
+            if (review.getId().equals(reviewId)){
+                review.setName(newReview.getName());
+                review.setDescription(newReview.getDescription());
+                review.setRating(newReview.getRating());
+                //review.setCompany(newReview);
+                reviewRepository.save(review);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteReview(Long companyId, Long reviewId) {
+        List<Review> reviews = reviewRepository.findByCompanyId(companyId);
+
+        for (Review review : reviews){
+            if (review.getId().equals(reviewId)) {
+                reviewRepository.delete(review);
+                return true;
+            }
+        }
+        return false;
     }
 
 }
